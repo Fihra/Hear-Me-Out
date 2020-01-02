@@ -1,12 +1,21 @@
 import React from 'react';
+import Navbar from './components/Navbar';
+import Signup from './forms/Signup';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Hear Me Out</h1>
-    </div>
-  );
+import { connect } from 'react-redux';
+
+
+class App extends React.Component {
+  render(){
+    return (
+      <div className="App">
+        <Navbar/>
+        <h1>Hear Me Out</h1>
+        <Signup/>
+      </div>
+    );
+  }
 }
 
 export default App;
