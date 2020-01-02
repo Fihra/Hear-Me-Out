@@ -3,6 +3,10 @@ import Navbar from './components/Navbar';
 import Signup from './forms/Signup';
 import './App.css';
 
+import About from './components/About';
+
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
@@ -18,8 +22,6 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-
-
 class App extends React.Component {
 
   componentDidMount(){
@@ -32,9 +34,15 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <Navbar/>
-        <h1>Hear Me Out</h1>
-        <Signup/>
+        <Router>
+          <Navbar/>
+          <h1>Hear Me Out</h1>
+          <Route exact path="/" render={(routerProps) => <Signup {...routerProps}/>}/>
+          <Route exact path="/about" render={(routerProps) => <About {...routerProps}/>}/>
+          
+          
+        </Router>
+       
       </div>
     );
   }
