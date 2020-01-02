@@ -5,9 +5,31 @@ import './App.css';
 
 import { connect } from 'react-redux';
 
+const mapStateToProps = (state) => {
+  console.log(state);
+  return{
+    users: state.users
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+  }
+}
+
+
 
 class App extends React.Component {
+
+  componentDidMount(){
+    console.log("HEre I am");
+  }
   render(){
+
+    const { users } = this.props;
+    console.log(users);
+
     return (
       <div className="App">
         <Navbar/>
@@ -18,4 +40,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
