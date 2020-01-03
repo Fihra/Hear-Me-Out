@@ -1,12 +1,5 @@
 import React from 'react';
 
-class User{
-    constructor(username, password){
-        this.username = username;
-        this.password = password;
-    }
-}   
-
 class Signup extends React.Component{
     constructor(){
         super();
@@ -27,8 +20,6 @@ class Signup extends React.Component{
         e.preventDefault();
 
         const { newUsername, newPassword } = this.state;
-
-        const newUser = new User(newUsername, newPassword);
 
     }
 

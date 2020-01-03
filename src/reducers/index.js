@@ -12,7 +12,7 @@ const mainReducer = (state = initialState, action) => {
         case "SIGN_UP":
             return{
                 ...state, 
-                users: [...state.users, action]
+                users: [...state.users, action.newUser]
             }
         default:
             return state;

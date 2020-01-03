@@ -12,4 +12,18 @@ router.get('/', async (req, res) => {
     }
 })
 
+//Create New User
+router.post('/', async (req, res) => {
+    const user = new User({
+        name: req.body.name,
+        password: req.body.password
+    });
+    try{
+        const newUser = await user.save();
+        res.json(newUser);
+    }catch(err){
+        res.json({message: err});
+    }
+})
+
 module.exports = router;

@@ -8,8 +8,8 @@ class Navbar extends React.Component{
                 <ul>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to='/about'>About</Link></li>
-                    <li>Directory</li>
-                    <li>Profile</li>
+                    <li><Link to='/directory'>Directory</Link></li>
+                    <li><Link to='/profile'>Profile</Link></li>
                     <li>Login/Signup</li>
                 </ul>
             </div>

@@ -19,9 +19,19 @@ export function getUsers(users){
     }
 }
 
-export function newUser(newUser) {
-    return{
+export function newUser(name, password) {
+    return((dispatch) => {
+        axios.post(`${API}`, {
+            name: name,
+            password: password
+        })
+        .then(resp => dispatch(createUser(resp.data)))
+    })
+}
+
+export function createUser(user){
+    return {
         type: "SIGN_UP",
-        user: newUser
+        newUser: user
     }
 }
