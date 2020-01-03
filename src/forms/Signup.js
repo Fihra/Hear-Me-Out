@@ -4,7 +4,7 @@ class Signup extends React.Component{
     constructor(){
         super();
         this.state = {
-            newUsername: "",
+            newEmail: "",
             newPassword: "",
             confirmPassword: ""
         }
@@ -19,9 +19,9 @@ class Signup extends React.Component{
     handleSubmit = (e) => {
         e.preventDefault();
 
-        const { newUsername, newPassword } = this.state;
-        
-        this.props.newUser(newUsername, newPassword);
+        const { newEmail, newPassword } = this.state;
+
+        this.props.newUser(newEmail, newPassword);
 
         e.target.reset();
     }
@@ -31,8 +31,8 @@ class Signup extends React.Component{
             <div>
                 <h2>Signup</h2>
                 <form onSubmit={this.handleSubmit}>
-                    <label>New Username</label>
-                    <input type="text" name="newUsername" placeholder="username" onChange={this.handleChange}></input>
+                    <label>New Email</label>
+                    <input type="email" name="newEmail" placeholder="email" onChange={this.handleChange}></input>
                     <label>New Password</label>
                     <input type="password" name="newPassword" placeholder="password" onChange={this.handleChange}></input>
                     {/* <label>Confirm Password</label>

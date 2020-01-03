@@ -4,7 +4,7 @@ class Login extends React.Component{
     constructor(props){
         super();
         this.state ={
-            username: "",
+            email: "",
             password: ""
         }
     }
@@ -17,7 +17,7 @@ class Login extends React.Component{
 
     handleSubmit = (e) => {
         e.preventDefault();
-        
+
     }
 
     render(){
@@ -25,8 +25,8 @@ class Login extends React.Component{
             <div>
                 <h2>Login</h2>
                 <form onSubmit={this.handleSubmit}>
-                    <label>Username</label>
-                    <input type="text" name="username" placeholder="username" onChange={this.handleChange}></input>
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="email" onChange={this.handleChange}></input>
                     <label>Password</label>
                     <input type="password" name="password" placeholder="password" onChange={this.handleChange}></input>
                     <button type="submit" value="Submit">Login</button>

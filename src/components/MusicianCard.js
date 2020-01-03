@@ -2,10 +2,11 @@ import React from 'react';
 
 class MusicianCard extends React.Component{
     render(){
-        const { name } = this.props.musician;
+        const { name, email } = this.props.musician;
         return(
             <div>
-                {name}
+                <p><b>{name}</b></p>
+                <p>Email: {email}</p>
             </div>
         )
     }

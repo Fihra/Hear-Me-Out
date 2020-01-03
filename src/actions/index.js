@@ -19,11 +19,11 @@ export function getUsers(users){
     }
 }
 
-export function newUser(name, password) {
-    console.log(name, password);
+export function newUser(email, password) {
+    console.log(email, password);
     return((dispatch) => {
         axios.post(`${API}`, {
-            name: name,
+            email: email,
             password: password
         })
         .then(resp => dispatch(createUser(resp.data)))
