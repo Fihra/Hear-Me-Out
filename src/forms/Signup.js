@@ -20,7 +20,10 @@ class Signup extends React.Component{
         e.preventDefault();
 
         const { newUsername, newPassword } = this.state;
+        
+        this.props.newUser(newUsername, newPassword);
 
+        e.target.reset();
     }
 
     render(){

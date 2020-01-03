@@ -10,9 +10,9 @@ import Profile from './components/Profile';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { connect } from 'react-redux';
+import { newUser } from './actions';
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return{
     users: state.users
   }
@@ -20,28 +20,22 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+      newUser: (name, password) => dispatch(newUser(name, password))
   }
 }
 
 class App extends React.Component {
 
-  componentDidMount(){
-    console.log("HEre I am");
-  }
   render(){
-
-    const { users } = this.props;
-    console.log(users);
 
     return (
       <div className="App">
         <Router>
           <Navbar/>
           <h1>Hear Me Out</h1>
-          <Route exact path="/" render={(routerProps) => <Signup {...routerProps}/>}/>
+          <Route exact path="/" render={(routerProps) => <Signup {...routerProps} newUser={this.props.newUser}/>}/>
           <Route exact path="/about" render={(routerProps) => <About {...routerProps}/>}/>
-          <Route exact path="/directory" render={(routerProps) => <Directory {...routerProps}/>}/>
+          <Route exact path="/directory" render={(routerProps) => <Directory {...routerProps} musicians={this.props.users}/>}/>
           <Route exact path="/profile" render={(routerProps) => <Profile {...routerProps}/>}/>
         
         </Router>

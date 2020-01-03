@@ -20,6 +20,7 @@ export function getUsers(users){
 }
 
 export function newUser(name, password) {
+    console.log(name, password);
     return((dispatch) => {
         axios.post(`${API}`, {
             name: name,
