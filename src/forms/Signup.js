@@ -19,11 +19,16 @@ class Signup extends React.Component{
     handleSubmit = (e) => {
         e.preventDefault();
 
-        const { newEmail, newPassword } = this.state;
+        const { newEmail, newPassword, confirmPassword } = this.state;
 
-        this.props.newUser(newEmail, newPassword);
+        if(newPassword === confirmPassword){
+            this.props.newUser(newEmail, newPassword);
+            e.target.reset();
+        } else{
+            console.log("Password didn't match");
+        }
 
-        e.target.reset();
+        
     }
 
     render(){
@@ -35,8 +40,8 @@ class Signup extends React.Component{
                     <input type="email" name="newEmail" placeholder="email" onChange={this.handleChange}></input>
                     <label>New Password</label>
                     <input type="password" name="newPassword" placeholder="password" onChange={this.handleChange}></input>
-                    {/* <label>Confirm Password</label>
-                    <input type="password" name="confirmPassword" placeholder="confirm password" ></input> */}
+                    <label>Confirm Password</label>
+                    <input type="password" name="confirmPassword" placeholder="confirm password" ></input>
                     <button type="submit" value="Submit">Submit</button>
                     <button type="reset">Reset</button>
                 </form>
