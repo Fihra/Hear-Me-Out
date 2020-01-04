@@ -1,12 +1,14 @@
 import React from 'react';
-import auth from '../components/auth';
+import {auth} from '../components/auth';
+import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component{
     constructor(props){
         super();
         this.state ={
             email: "",
-            password: ""
+            password: "",
+            redirectToReferrer: false
         }
     }
 
@@ -16,15 +18,39 @@ class Login extends React.Component{
         })
     }
 
-    validateUser = () => {
-        this.props.musicians.forEach((m) => {
-            if(m.email === this.state.email && m.password === this.state.password){
-                return console.log("Success");
-            }
-            else {
-                console.log("Failure");
-            }
+    loggingIn = () => {
+        auth.authenticate(()=> {
+            this.setState({
+                redirectToReferrer: true
+            })
         })
+    }
+
+    validateUser = () => {
+        // const { redirectToReferrer } = this.state;
+        // if(redirectToReferrer === true) {
+        //     return (
+                
+        //     )
+        // }
+        const {musicians} =this.props;
+        const { email, password } = this.state;
+
+        musicians.find((m, i ) => {
+            //console.log(m);
+            if(m.email === email && m.password === password){
+                auth.isAuthenticated = true;
+                return this.props.history.push("/profile");
+                //return <Redirect to='/profile'/>
+                //return m;
+            }
+                //console.log("Success");
+                //return this.props.history.push('/profile');
+                //this.loggingIn();
+            return null;
+        })
+        console.log("fdsa");
+        
     }
 
     handleSubmit = (e) => {
@@ -33,6 +59,7 @@ class Login extends React.Component{
     }
 
     render(){
+
         return(
             <div>
                 <h2>Login</h2>

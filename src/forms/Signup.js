@@ -41,7 +41,7 @@ class Signup extends React.Component{
                     <label>New Password</label>
                     <input type="password" name="newPassword" placeholder="password" onChange={this.handleChange}></input>
                     <label>Confirm Password</label>
-                    <input type="password" name="confirmPassword" placeholder="confirm password" ></input>
+                    <input type="password" name="confirmPassword" placeholder="confirm password" onChange={this.handleChange} ></input>
                     <button type="submit" value="Submit">Submit</button>
                     <button type="reset">Reset</button>
                 </form>
