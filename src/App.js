@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Signup from './forms/Signup';
+import Login from './forms/Login';
 import './App.css';
 
 import About from './components/About';
@@ -33,10 +34,11 @@ class App extends React.Component {
         <Router>
           <Navbar/>
           <h1>Hear Me Out</h1>
-          <Route exact path="/" render={(routerProps) => <Signup {...routerProps} newUser={this.props.newUser}/>}/>
+          <Route exact path="/signup" render={(routerProps) => <Signup {...routerProps} newUser={this.props.newUser}/>}/>
           <Route exact path="/about" render={(routerProps) => <About {...routerProps}/>}/>
           <Route exact path="/directory" render={(routerProps) => <Directory {...routerProps} musicians={this.props.users}/>}/>
           <Route exact path="/profile" render={(routerProps) => <Profile {...routerProps}/>}/>
+          <Route exact path="/login" render={(routerProps) => <Login {...routerProps} musicians={this.props.users}/>}/>
         
         </Router>
        

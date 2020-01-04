@@ -25,7 +25,7 @@ class Signup extends React.Component{
             this.props.newUser(newEmail, newPassword);
             e.target.reset();
         } else{
-            console.log("Password didn't match");
+            console.log("Password didn't match");   
         }
 
         

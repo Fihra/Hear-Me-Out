@@ -1,4 +1,5 @@
 import React from 'react';
+import auth from '../components/auth';
 
 class Login extends React.Component{
     constructor(props){
@@ -15,9 +16,20 @@ class Login extends React.Component{
         })
     }
 
+    validateUser = () => {
+        this.props.musicians.forEach((m) => {
+            if(m.email === this.state.email && m.password === this.state.password){
+                return console.log("Success");
+            }
+            else {
+                console.log("Failure");
+            }
+        })
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
-
+        this.validateUser();
     }
 
     render(){
