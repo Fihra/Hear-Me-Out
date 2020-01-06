@@ -10,6 +10,7 @@ class Profile extends React.Component{
                 <h3>Alias: </h3>
                 <h3>First Name: </h3>
                 <h3>Last Name: </h3>
+                <h3>Email: </h3>
                 <h3>Location: </h3>
                 <h3>Main Role: </h3>
                 <h3>Other Roles: </h3>

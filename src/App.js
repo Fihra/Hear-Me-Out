@@ -36,10 +36,11 @@ const mapDispatchToProps = (dispatch) => {
 //   }
 // }
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ render: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
     auth.isAuthenticated === true 
-      ? <Profile {...props}/>
+      ? //<Profile {...props}/>
+      <Component {...props}/>
       : <Redirect to='/login'/> 
   )}/>
 )

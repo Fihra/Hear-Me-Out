@@ -4,11 +4,12 @@ import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component{
     constructor(props){
-        super();
+        super(props);
         this.state ={
             email: "",
             password: "",
-            redirectToReferrer: false
+            redirectToReferrer: false,
+            savedID: ""
         }
     }
 
@@ -19,10 +20,16 @@ class Login extends React.Component{
     }
 
     loggingIn = () => {
-        auth.authenticate(()=> {
-            this.setState({
-                redirectToReferrer: true
-            })
+        auth.authenticate();
+        this.setState({
+            redirectToReferrer: true
+        })
+       
+    }
+
+    saveIDReference = (id) => {
+        this.setState({
+            savedID: id
         })
     }
 
@@ -32,8 +39,9 @@ class Login extends React.Component{
 
         musicians.find((m, i ) => {
             if(m.email === email && m.password === password){
+                this.saveIDReference(m._id);
                 this.loggingIn();
-
+                //console.log(this.state.redirectToReferrer);              
             }
             return null;
         })    
@@ -45,11 +53,11 @@ class Login extends React.Component{
     }
 
     render(){
-        const { redirectToReferrer } = this.state;
-
+        const { redirectToReferrer, savedID } = this.state;
+        console.log(savedID);
         if(redirectToReferrer === true){
             return(
-                <Redirect to='/profile'/>
+                <Redirect to={{pathname:'/profile', state:{id: savedID}}}/>
             )
         }
 

@@ -22,10 +22,10 @@
 
 export const auth = {
     isAuthenticated: false,
-    authenticate(cb){
+    authenticate(){
         this.isAuthenticated = true
     },
-    signout(cb){
+    signout(){
         this.isAuthenticated = false
     }
 }
