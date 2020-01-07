@@ -57,7 +57,7 @@ class Login extends React.Component{
         console.log(savedID);
         if(redirectToReferrer === true){
             return(
-                <Redirect to={{pathname:'/profile', state:{id: savedID}}}/>
+                <Redirect to={{pathname:`/profile/${savedID}`, state:{id: savedID}}}/>
             )
         }
 

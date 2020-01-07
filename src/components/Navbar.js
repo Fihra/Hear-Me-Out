@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link, Switch, Route, BrowserRouter as Router } from 'react-router-dom';
-import { Tabs, Tab } from '@material-ui/core';
+import { Link} from 'react-router-dom';
+//import { Link, Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+//import { Tabs, Tab } from '@material-ui/core';
 
 class Navbar extends React.Component{
     render(){
