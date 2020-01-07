@@ -24,7 +24,7 @@ class Navbar extends React.Component{
                 </Switch> */}
                 <ul>
                     <li><Link to="/">Home</Link></li>
-                    <li><Link to='/about'>About</Link></li>
+                    {/* <li><Link to='/about'>About</Link></li> */}
                     <li><Link to='/directory'>Directory</Link></li>
                     <li><Link to='/profile/:id'>Profile</Link></li>
                     <li><Link to='/login'>Login/Signup</Link></li>

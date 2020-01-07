@@ -35,4 +35,29 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+router.put('/:id', async (req, res) => {
+    try{
+        const updatedUser = await User.updateOne({
+            _id: req.params.id}, {
+                $set: {
+                    email: req.body.email,
+                    alias: req.body.alias,
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    location: req.body.location,
+                    mainRole: req.body.mainRole,
+                    otherRoles: req.body.otherRoles,
+                    instruments: req.body.instruments,
+                    featuredYoutube: req.body.featuredYoutube,
+                    bandcampLink: req.body.bandcampLink,
+                    spotifyLink: req.body.spotifyLink,
+                    mainWebsite: req.body.mainWebsite 
+                }
+            })
+        res.json(updatedUser);
+    }catch(err){
+        res.json({message: err});
+    }
+})
+
 module.exports = router;
