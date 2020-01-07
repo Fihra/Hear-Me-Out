@@ -20,12 +20,6 @@ class Profile extends React.Component{
             mainWeb: ""
         }
     }
-    
-    allDetails = (email) => {
-        this.setState({
-            email: email,
-        })
-    }
 
     changeEditMode = () => {
         this.setState({
@@ -34,6 +28,7 @@ class Profile extends React.Component{
     }
 
     renderEditView = () => {
+        console.log(this.state);
         return (
             <div>      
                 <p>Alias: <input type="text" name="alias" defaultValue={this.state.alias}></input></p>
@@ -53,14 +48,14 @@ class Profile extends React.Component{
             )    
     }
 
-    renderDefaultView = (musician) => {
-        const { email } = musician;
+    renderDefaultView = () => {
+        const { MEmail } = this.state;
         return (
         <div>      
             <p>Alias: </p>
             <p>First Name: </p>
             <p>Last Name: </p>
-            <p>Email: {email} </p>
+            <p>Email: {MEmail} </p>
             <p>Location: </p>
             <p>Main Role: </p>
             <p>Other Roles: </p>
@@ -74,21 +69,31 @@ class Profile extends React.Component{
         )    
     }
 
-    render(){
+    componentDidMount(){
         const { musicians } = this.props;
         const { id } = this.props.location.state;
         let selectedMusician = musicians.filter((musician, i ) => {
             return musician._id === id;
         })
 
-        //const { email, password } = selectedMusician[0];
+        const { email, password } = selectedMusician[0];
 
-        //this.allDetails(email);
+        this.setState({
+            MEmail: email
+        })
+    }
+
+    render(){
+        // const { musicians } = this.props;
+        // const { id } = this.props.location.state;
+        // let selectedMusician = musicians.filter((musician, i ) => {
+        //     return musician._id === id;
+        // })
 
         return(
             <div>
             <h1>My Profile <button onClick={this.changeEditMode}>Edit</button></h1>
-            {this.state.inEditMode ? this.renderEditView() : this.renderDefaultView(selectedMusician[0])}
+            {this.state.inEditMode ? this.renderEditView() : this.renderDefaultView()}
             </div>
         
         )
