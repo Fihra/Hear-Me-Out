@@ -37,6 +37,13 @@ export function createUser(user){
     }
 }
 
+export function getUser(user){
+    return((dispatch) => {
+        axios.get(`${API}/${user}`)
+        .then(resp => console.log(resp))
+    })
+}
+
 export function updateUser(user){
     console.log(user);
 
