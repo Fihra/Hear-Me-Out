@@ -14,6 +14,14 @@ const mainReducer = (state = initialState, action) => {
                 ...state, 
                 users: [...state.users, action.newUser]
             }
+        case "UPDATE_USER":
+            const userID = action.updatedUser;
+            debugger;
+            return{
+                ...state.map((user) => {
+                    return user.id === userID.id
+                } )
+            }
         default:
             return state;
     }

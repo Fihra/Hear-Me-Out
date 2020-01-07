@@ -36,6 +36,8 @@ router.get('/:id', async (req, res) => {
 })
 
 router.put('/:id', async (req, res) => {
+    console.log(req.body);
+    debugger;
     try{
         const updatedUser = await User.updateOne({
             _id: req.params.id}, {
@@ -48,10 +50,10 @@ router.put('/:id', async (req, res) => {
                     mainRole: req.body.mainRole,
                     otherRoles: req.body.otherRoles,
                     instruments: req.body.instruments,
-                    featuredYoutube: req.body.featuredYoutube,
-                    bandcampLink: req.body.bandcampLink,
-                    spotifyLink: req.body.spotifyLink,
-                    mainWebsite: req.body.mainWebsite 
+                    featuredYoutube: req.body.featYoutube,
+                    bandcampLink: req.body.bandcamp,
+                    spotifyLink: req.body.spotify,
+                    mainWebsite: req.body.mainWeb 
                 }
             })
         res.json(updatedUser);

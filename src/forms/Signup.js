@@ -26,9 +26,7 @@ class Signup extends React.Component{
             e.target.reset();
         } else{
             console.log("Password didn't match");   
-        }
-
-        
+        }    
     }
 
     render(){

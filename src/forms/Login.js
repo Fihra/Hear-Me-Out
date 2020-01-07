@@ -26,7 +26,6 @@ class Login extends React.Component{
         })
        
     }
-
     saveIDReference = (id) => {
         this.setState({
             savedID: id
@@ -40,8 +39,7 @@ class Login extends React.Component{
         musicians.find((m, i ) => {
             if(m.email === email && m.password === password){
                 this.saveIDReference(m._id);
-                this.loggingIn();
-                //console.log(this.state.redirectToReferrer);              
+                this.loggingIn();            
             }
             return null;
         })    

@@ -22,7 +22,7 @@ export function getUsers(users){
 export function newUser(email, password) {
     console.log(email, password);
     return((dispatch) => {
-        axios.post(`${API}`, {
+        axios.post(API, {
             email: email,
             password: password
         })
@@ -34,5 +34,40 @@ export function createUser(user){
     return {
         type: "SIGN_UP",
         newUser: user
+    }
+}
+
+export function updateUser(user){
+    console.log(user);
+
+    // const body = {
+    //     email: user.MEmail,
+    //     alias: user.alias,
+    //     firstName: user.firstName,
+    //     lastName: user.lastName,
+    //     location: user.location,
+    //     mainRole: user.mainRole,
+    //     otherRoles: user.otherRoles,
+    //     instruments: user.instruments,
+    //     featuredYoutube: user.featYoutube,
+    //     bandcampLink: user.bandcamp,
+    //     spotifyLink: user.spotify,
+    //     mainWebsite: user.mainWeb 
+    // }
+    //debugger;
+    return((dispatch) => {
+        axios.put(`${API}/${user.savedID}`, user)
+        .then(resp => {
+            //debugger;
+            dispatch(updateUserInfo(user));
+        })
+        .catch(err => console.error(err))
+    })
+}
+
+export function updateUserInfo(user){
+    return{
+        type: "UPDATE_USER",
+        updatedUser: user
     }
 }
