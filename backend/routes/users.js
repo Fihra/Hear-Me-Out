@@ -41,20 +41,21 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ email: req.body.email});
     //console.log(user);
     //TODO: Passwords are not matching, User input password and hashedpassword
-    console.log(req.body.password);
-    console.log(user.password);
-    console.log(user.password === req.body.password);
     if(user === null){
         return res.status(400).send("Cannot find user");
     }
     try{
          if(await bcrypt.compare(req.body.password, user.password)){
-            console.log("here I am")
+            console.log("matched")
             const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
             res.json({accessToken: accessToken});
          }
+         else{
+             console.log("Wrong Password");
+         }
          
-    } catch{
+    } catch(err){
+        console.log("But I'm also here")
         res.status(500).send();
     }
 })
