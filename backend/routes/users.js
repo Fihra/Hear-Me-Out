@@ -36,19 +36,20 @@ router.post('/', async (req, res) => {
 })
 
 router.post('/login', async (req, res) => {
-    //console.log(req.body);
-    //console.log(req.body.email);
-    //LOOK IN BACKEND
-    //USER IS NOT BEING READ, IT KEEPS RETURNING NULL AND HITTING STATUS 500
-    const user = User.find(user => {
-        console.log(user.email);
-        return user.email === req.body.email
-    })
+    const hashingPassword = await bcrypt.hash(req.body.password, 10);
+    console.log(hashingPassword);
+    const user = await User.findOne({ email: req.body.email});
+    //console.log(user);
+    //TODO: Passwords are not matching, User input password and hashedpassword
+    console.log(req.body.password);
+    console.log(user.password);
+    console.log(user.password === req.body.password);
     if(user === null){
         return res.status(400).send("Cannot find user");
     }
     try{
          if(await bcrypt.compare(req.body.password, user.password)){
+            console.log("here I am")
             const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
             res.json({accessToken: accessToken});
          }
