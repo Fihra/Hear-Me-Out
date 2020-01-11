@@ -40,13 +40,15 @@ router.post('/login', async (req, res) => {
     console.log(hashingPassword);
     const user = await User.findOne({ email: req.body.email});
     //console.log(user);
-    //TODO: Passwords are not matching, User input password and hashedpassword
     if(user === null){
         return res.status(400).send("Cannot find user");
     }
     try{
          if(await bcrypt.compare(req.body.password, user.password)){
             console.log("matched")
+            //Current Error So far
+            //TODO JWT implementation, token is probably breaking here
+            //It does reach to this point but will also return catch error as well
             const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
             res.json({accessToken: accessToken});
          }
