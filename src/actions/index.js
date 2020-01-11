@@ -44,6 +44,24 @@ export function getUser(user){
     })
 }
 
+export function loginUser(user){
+    console.log(user);
+    return((dispatch) => {
+        axios.post(`${API}/login`, {
+            email: user.email,
+            password: user.password
+        })
+        .then(resp => dispatch(loggingUser(resp.data)))
+    })
+}
+
+export function loggingUser(user){
+    return {
+        type: "LOGIN",
+        user: user
+    }
+}
+
 export function updateUser(user){
     console.log(user);
 

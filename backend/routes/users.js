@@ -36,7 +36,14 @@ router.post('/', async (req, res) => {
 })
 
 router.post('/login', async (req, res) => {
-    const user = User.find(user => user.email === req.body.email)
+    //console.log(req.body);
+    //console.log(req.body.email);
+    //LOOK IN BACKEND
+    //USER IS NOT BEING READ, IT KEEPS RETURNING NULL AND HITTING STATUS 500
+    const user = User.find(user => {
+        console.log(user.email);
+        return user.email === req.body.email
+    })
     if(user === null){
         return res.status(400).send("Cannot find user");
     }

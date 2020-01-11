@@ -11,7 +11,7 @@ app.use(cors());
 //Import Routes
 const UsersRoute = require('./routes/users');
 
-app.use('/api/Users', UsersRoute);
+app.use('/api/users', UsersRoute);
 
 //DB Connection
 const db= 'mongodb://localhost:27017/UserDB';

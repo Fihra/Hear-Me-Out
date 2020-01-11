@@ -33,16 +33,19 @@ class Login extends React.Component{
     }
 
     validateUser = () => {
-        const {musicians} =this.props;
-        const { email, password } = this.state;
-
-        musicians.find((m, i ) => {
-            if(m.email === email && m.password === password){
-                this.saveIDReference(m._id);
-                this.loggingIn();            
-            }
-            return null;
-        })    
+        //const {musicians} =this.props;
+        //const { email, password } = this.state;
+        //TODO: LOGIN AUTHENTICATE TO BACKEND
+        this.props.loginUser(this.state);
+        // musicians.find((m, i ) => {
+        //     console.log(m);
+        //     if(m.email === email && m.password === password){
+        //         console.log("enter")
+        //         //this.saveIDReference(m._id);
+        //         this.loggingIn();            
+        //     }
+        //     return null;
+        // })    
     }
 
     handleSubmit = (e) => {

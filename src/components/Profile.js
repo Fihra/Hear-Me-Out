@@ -81,7 +81,24 @@ class Profile extends React.Component{
         )    
     }
 
-    componentDidMount(){
+    // componentDidMount(){
+    //     const { musicians } = this.props;
+    //     const { id } = this.props.location.state;
+    //     let selectedMusician = musicians.filter((musician, i ) => {
+    //         return musician._id === id;
+    //     })
+
+    //     const { email, password, firstName, lastName } = selectedMusician[0];
+
+    //     this.setState({
+    //         savedID: id,
+    //         firstName: firstName,
+    //         lastName: lastName,
+    //         MEmail: email
+    //     })
+    // }
+
+    render(){
         const { musicians } = this.props;
         const { id } = this.props.location.state;
         let selectedMusician = musicians.filter((musician, i ) => {
@@ -92,18 +109,10 @@ class Profile extends React.Component{
 
         this.setState({
             savedID: id,
-            firstName, firstName,
+            firstName: firstName,
             lastName: lastName,
             MEmail: email
         })
-    }
-
-    render(){
-        // const { musicians } = this.props;
-        // const { id } = this.props.location.state;
-        // let selectedMusician = musicians.filter((musician, i ) => {
-        //     return musician._id === id;
-        // })
 
         return(
             <div>

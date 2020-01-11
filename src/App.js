@@ -12,7 +12,7 @@ import {auth} from './components/auth';
 import { BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { newUser, updateUser } from './actions';
+import { newUser, loginUser, updateUser } from './actions';
 
 const mapStateToProps = (state) => {
   return{
@@ -23,6 +23,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
       newUser: (name, password) => dispatch(newUser(name, password)),
+      loginUser: (user) => dispatch(loginUser(user)),
       updateUser: (user) => dispatch(updateUser(user)),
   }
 }
@@ -48,7 +49,7 @@ class App extends Component{
           <PrivateRoute exact path="/profile/:id" render={(routerProps) => <Profile {...routerProps} musicians={this.props.users} updateUser={this.props.updateUser}/>}/>
           <Route exact path="/login" render={(routerProps) => 
           <Fragment>
-            <Login {...routerProps} musicians={this.props.users}/>
+            <Login {...routerProps} musicians={this.props.users} loginUser={this.props.loginUser}/>
             <Signup {...routerProps} newUser={this.props.newUser}/>
           </Fragment>}/>
           
