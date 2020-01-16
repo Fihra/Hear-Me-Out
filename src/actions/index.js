@@ -1,5 +1,6 @@
 import axios from 'axios';
-
+import setAuthToken from '../utils/setAuthToken';
+import jwt from 'jsonwebtoken';
 const API = 'http://localhost:3001/api/users';
 
 export function loadUsers(){
@@ -51,7 +52,14 @@ export function loginUser(user){
             email: user.email,
             password: user.password
         })
-        .then(resp => dispatch(loggingUser(resp.data)))
+        .then(resp => {
+            const token = resp.data.accessToken;
+            console.log(token);
+            localStorage.setItem('jwtToken', token);
+            setAuthToken(token);
+            console.log(jwt.decode(token));
+            dispatch(loggingUser(resp.data))
+        })
     })
 }
 
