@@ -17,6 +17,7 @@ const mainReducer = (state = initialState, action) => {
             }
         case "LOGIN":
             return{
+                ...state,
                 selectedUser: action.user
             }
         case "UPDATE_USER":

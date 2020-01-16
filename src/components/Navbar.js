@@ -9,7 +9,7 @@ class Navbar extends React.Component{
                 <Tabs>
                     <Tab label="Home" component={Link} to='/'/>
                     <Tab label="Directory" component={Link} to='/directory'/>
-                    <Tab label="Profile" component={Link} to='/profile/:id'/>
+                    <Tab label="Profile" component={Link} to='/profile'/>
                     <Tab label="Login/Signup" component={Link} to='/login'/>
                 </Tabs>
                 {/* <ul>

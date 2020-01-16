@@ -46,7 +46,7 @@ export function getUser(user){
 }
 
 export function loginUser(user){
-    console.log(user);
+    //console.log(user);
     return((dispatch) => {
         axios.post(`${API}/login`, {
             email: user.email,
@@ -54,11 +54,10 @@ export function loginUser(user){
         })
         .then(resp => {
             const token = resp.data.accessToken;
-            console.log(token);
             localStorage.setItem('jwtToken', token);
             setAuthToken(token);
-            console.log(jwt.decode(token));
-            dispatch(loggingUser(resp.data))
+            const setUser = jwt.decode(token);
+            dispatch(loggingUser(setUser))
         })
     })
 }

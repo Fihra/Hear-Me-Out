@@ -1,24 +1,32 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => {
+    //console.log(state);
+    return{
+        selectedUser: state.selectedUser
+    }
+}
 
 class Profile extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             inEditMode: false,
-            savedID: "",
-            alias: "",
-            firstName: "",
-            lastName: "",
-            MEmail: "",
-            location: "",
-            mainRole: "",
-            otherRoles: [],
-            instruments: [],
-            featYoutube: "",
-            youtube: "",
-            bandcamp: "",
-            spotify: "",
-            mainWeb: ""
+            savedID: "0123",
+            alias: "Alias",
+            firstName: "Bob",
+            lastName: "Smith",
+            MEmail: "bobsmith@gmail.com",
+            location: "Here",
+            mainRole: "Musician",
+            otherRoles: ["Composer", "Arranger"],
+            instruments: ["piano", "violin"],
+            featYoutube: "youtube.com",
+            youtube: "Bob Smith Youtuber",
+            bandcamp: "bandcamp.com/bobsmith",
+            spotify: "spotify.com/artists/bobsmith",
+            mainWeb: "bobsmith.com"
         }
     }
 
@@ -36,7 +44,7 @@ class Profile extends React.Component{
 
     submitChanges = (e) => {
         e.preventDefault();
-        this.props.updateUser(this.state);
+        //this.props.updateUser(this.state);
     }
 
     renderEditView = () => {
@@ -81,39 +89,34 @@ class Profile extends React.Component{
         )    
     }
 
-    // componentDidMount(){
-    //     const { musicians } = this.props;
-    //     const { id } = this.props.location.state;
-    //     let selectedMusician = musicians.filter((musician, i ) => {
-    //         return musician._id === id;
-    //     })
+    componentDidUpdate(prevProps, prevState) {
+        // if(prevProps.selectedUser !== this.prevProps.data){
+            
+        // }
+        //debugger;
+        // console.log(prevProps);
+        //     console.log(prevState)
+        
+    }
 
-    //     const { email, password, firstName, lastName } = selectedMusician[0];
+    componentDidMount(){
+        //TODO
+        const { user } = this.props.selectedUser;
 
-    //     this.setState({
-    //         savedID: id,
-    //         firstName: firstName,
-    //         lastName: lastName,
-    //         MEmail: email
-    //     })
-    // }
+        console.log(user)
+        //debugger;
+        if(user !== undefined){
+            this.setState({
+                     MEmail: user.email
+            })
+        }
+        
+    }
 
     render(){
-        const { musicians } = this.props;
-        const { id } = this.props.location.state;
-        let selectedMusician = musicians.filter((musician, i ) => {
-            return musician._id === id;
-        })
+        // const { user } = this.props.selectedUser;
 
-        const { email, password, firstName, lastName } = selectedMusician[0];
-
-        this.setState({
-            savedID: id,
-            firstName: firstName,
-            lastName: lastName,
-            MEmail: email
-        })
-
+        // console.log(user === undefined)
         return(
             <div>
             <h1>My Profile <button onClick={this.changeEditMode}>Edit</button></h1>
@@ -124,4 +127,4 @@ class Profile extends React.Component{
     }
 }
 
-export default Profile;
+export default connect(mapStateToProps, null)(Profile);
