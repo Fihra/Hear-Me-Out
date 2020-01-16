@@ -37,15 +37,7 @@ class Login extends React.Component{
         //const { email, password } = this.state;
         //TODO: LOGIN AUTHENTICATE TO BACKEND
         this.props.loginUser(this.state);
-        // musicians.find((m, i ) => {
-        //     console.log(m);
-        //     if(m.email === email && m.password === password){
-        //         console.log("enter")
-        //         //this.saveIDReference(m._id);
-        //         this.loggingIn();            
-        //     }
-        //     return null;
-        // })    
+ 
     }
 
     handleSubmit = (e) => {
@@ -55,7 +47,7 @@ class Login extends React.Component{
 
     render(){
         const { redirectToReferrer, savedID } = this.state;
-        console.log(savedID);
+        //console.log(savedID);
         if(redirectToReferrer === true){
             return(
                 <Redirect to={{pathname:`/profile/${savedID}`, state:{id: savedID}}}/>

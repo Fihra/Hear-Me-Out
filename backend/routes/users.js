@@ -1,8 +1,8 @@
+require('dotenv').config();
+
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
-require('dotenv').config();
 
 const router = express.Router();
 
@@ -36,20 +36,19 @@ router.post('/', async (req, res) => {
 })
 
 router.post('/login', async (req, res) => {
-    const hashingPassword = await bcrypt.hash(req.body.password, 10);
-    console.log(hashingPassword);
     const user = await User.findOne({ email: req.body.email});
-    //console.log(user);
+    //console.log("Line 42: ", user);
     if(user === null){
         return res.status(400).send("Cannot find user");
     }
+
     try{
          if(await bcrypt.compare(req.body.password, user.password)){
-            console.log("matched")
             //Current Error So far
             //TODO JWT implementation, token is probably breaking here
             //It does reach to this point but will also return catch error as well
-            const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+            const accessToken = jwt.sign({user: user}, process.env.ACCESS_TOKEN_SECRET);
+            console.log("Line 53: ", accessToken);
             res.json({accessToken: accessToken});
          }
          else{
@@ -59,6 +58,7 @@ router.post('/login', async (req, res) => {
     } catch(err){
         console.log("But I'm also here")
         res.status(500).send();
+        
     }
 })
 
@@ -77,6 +77,11 @@ const authenticateToken = (req, res, next) => {
         next();
     })
 }
+
+router.get('/profile', authenticateToken, (req, res) => {
+    const user = req.body.user;
+    res.json(user)
+})
 
 router.get('/:id', async (req, res) => {
     try{

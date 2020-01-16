@@ -1,5 +1,6 @@
 const initialState = {
-    users: []
+    users: [],
+    selectedUser: {}
 }
 
 const mainReducer = (state = initialState, action) => {
@@ -13,6 +14,10 @@ const mainReducer = (state = initialState, action) => {
             return{
                 ...state, 
                 users: [...state.users, action.newUser]
+            }
+        case "LOGIN":
+            return{
+                selectedUser: action.user
             }
         case "UPDATE_USER":
             const updateUser = action.updatedUser;
