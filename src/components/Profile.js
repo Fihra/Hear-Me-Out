@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
-    //console.log(state);
+    console.log(state);
     return{
         selectedUser: state.selectedUser
     }
@@ -90,33 +90,15 @@ class Profile extends React.Component{
     }
 
     componentDidUpdate(prevProps, prevState) {
-        // if(prevProps.selectedUser !== this.prevProps.data){
-            
-        // }
-        //debugger;
-        // console.log(prevProps);
-        //     console.log(prevState)
-        
-    }
-
-    componentDidMount(){
-        //TODO
-        const { user } = this.props.selectedUser;
-
-        console.log(user)
-        //debugger;
-        if(user !== undefined){
+        if(prevProps.selectedUser !== this.props.selectedUser){
+            const { user } = this.props.selectedUser
             this.setState({
-                     MEmail: user.email
+                MEmail: user.email
             })
-        }
-        
+        }   
     }
 
     render(){
-        // const { user } = this.props.selectedUser;
-
-        // console.log(user === undefined)
         return(
             <div>
             <h1>My Profile <button onClick={this.changeEditMode}>Edit</button></h1>
