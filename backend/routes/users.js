@@ -35,20 +35,18 @@ router.post('/', async (req, res) => {
     }
 })
 
+//Login User
 router.post('/login', async (req, res) => {
     const user = await User.findOne({ email: req.body.email});
-    //console.log("Line 42: ", user);
     if(user === null){
         return res.status(400).send("Cannot find user");
     }
 
     try{
          if(await bcrypt.compare(req.body.password, user.password)){
-            //Current Error So far
-            //TODO JWT implementation, token is probably breaking here
-            //It does reach to this point but will also return catch error as well
+             //Create Token using user object, and secret key from .env file
             const accessToken = jwt.sign({user: user}, process.env.ACCESS_TOKEN_SECRET);
-            console.log("Line 53: ", accessToken);
+            //returns access token json
             res.json({accessToken: accessToken});
          }
          else{
@@ -56,7 +54,6 @@ router.post('/login', async (req, res) => {
          }
          
     } catch(err){
-        console.log("But I'm also here")
         res.status(500).send();
         
     }
@@ -92,11 +89,12 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-router.put('/:id', authenticateToken, async (req, res) => {
+router.patch('/:id', authenticateToken, async (req, res) => {
+    console.log("Hit Here Update Backend")
     console.log(req.body);
     try{
         const updatedUser = await User.updateOne({
-            _id: req.params.id}, {
+            _id: req.params.savedID}, {
                 $set: {
                     email: req.body.email,
                     alias: req.body.alias,

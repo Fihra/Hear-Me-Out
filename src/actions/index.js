@@ -70,8 +70,6 @@ export function loggingUser(user){
 }
 
 export function updateUser(user){
-    console.log(user);
-
     // const body = {
     //     email: user.MEmail,
     //     alias: user.alias,
@@ -88,12 +86,13 @@ export function updateUser(user){
     // }
     //debugger;
     return((dispatch) => {
-        axios.put(`${API}/${user.savedID}`, user)
+        axios.patch(`${API}/${user.savedID}`, user)
         .then(resp => {
             //debugger;
+            console.log("hit here")
             dispatch(updateUserInfo(user));
         })
-        .catch(err => console.error(err))
+        .catch(err => console.error(err, "Error spot"))
     })
 }
 

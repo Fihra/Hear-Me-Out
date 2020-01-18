@@ -46,7 +46,7 @@ class App extends Component{
           <h1>Hear Me Out <span role="img" aria-label="speaker">🔊</span></h1>
           <Route exact path="/" render={(routerProps) => <About {...routerProps}/>}/>
           <Route exact path="/directory" render={(routerProps) => <Directory {...routerProps} musicians={this.props.users}/>}/>
-          <PrivateRoute exact path="/profile" render={(routerProps) => <Profile {...routerProps} musicians={this.props.users} updateUser={this.props.updateUser}/>}/>
+          <PrivateRoute exact path="/profile" render={(routerProps) => <Profile {...routerProps} musicians={this.props.users}/>}/>
           <Route exact path="/login" render={(routerProps) => 
           <Fragment>
             <Login {...routerProps} musicians={this.props.users} loginUser={this.props.loginUser}/>
