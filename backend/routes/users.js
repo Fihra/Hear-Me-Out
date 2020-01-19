@@ -92,24 +92,29 @@ router.get('/:id', async (req, res) => {
 router.patch('/:id', authenticateToken, async (req, res) => {
     console.log("Hit Here Update Backend")
     console.log(req.body);
+    console.log("BACKEND PROBLEM")
+    console.log("Last name was even being written")
     try{
         const updatedUser = await User.updateOne({
             _id: req.params.savedID}, {
-                $set: {
-                    email: req.body.email,
-                    alias: req.body.alias,
-                    firstName: req.body.firstName,
-                    lastName: req.body.lastName,
-                    location: req.body.location,
-                    mainRole: req.body.mainRole,
-                    otherRoles: req.body.otherRoles,
-                    instruments: req.body.instruments,
-                    featuredYoutube: req.body.featYoutube,
-                    bandcampLink: req.body.bandcamp,
-                    spotifyLink: req.body.spotify,
-                    mainWebsite: req.body.mainWeb 
-                }
+                // $set: {
+                //     email: req.body.email,
+                //     alias: req.body.alias,
+                //     firstName: req.body.firstName,
+                //     lastName: req.body.lastName,
+                //     location: req.body.location,
+                //     mainRole: req.body.mainRole,
+                //     otherRoles: req.body.otherRoles,
+                //     instruments: req.body.instruments,
+                //     featuredYoutube: req.body.featYoutube,
+                //     bandcampLink: req.body.bandcamp,
+                //     spotifyLink: req.body.spotify,
+                //     mainWebsite: req.body.mainWeb 
+                // }
+                body: req.body
             })
+            console.log("2nd time around")
+            console.log(updatedUser)
         res.json(updatedUser);
     }catch(err){
         res.json({message: err});

@@ -21,7 +21,7 @@ export function getUsers(users){
 }
 
 export function newUser(email, password) {
-    console.log(email, password);
+    //console.log(email, password);
     return((dispatch) => {
         axios.post(API, {
             email: email,
@@ -70,26 +70,10 @@ export function loggingUser(user){
 }
 
 export function updateUser(user){
-    // const body = {
-    //     email: user.MEmail,
-    //     alias: user.alias,
-    //     firstName: user.firstName,
-    //     lastName: user.lastName,
-    //     location: user.location,
-    //     mainRole: user.mainRole,
-    //     otherRoles: user.otherRoles,
-    //     instruments: user.instruments,
-    //     featuredYoutube: user.featYoutube,
-    //     bandcampLink: user.bandcamp,
-    //     spotifyLink: user.spotify,
-    //     mainWebsite: user.mainWeb 
-    // }
-    //debugger;
     return((dispatch) => {
         axios.patch(`${API}/${user.savedID}`, user)
         .then(resp => {
-            //debugger;
-            console.log("hit here")
+            //console.log(resp)
             dispatch(updateUserInfo(user));
         })
         .catch(err => console.error(err, "Error spot"))

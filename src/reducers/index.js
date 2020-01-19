@@ -22,21 +22,19 @@ const mainReducer = (state = initialState, action) => {
             }
         case "UPDATE_USER":
             const updateUser = action.updatedUser;
+            console.log(updateUser)
             return{ 
                 // ...state.filter((user) => {
                 //     return user._id !== action.updateUser.savedID,
                 //     Object.assign({}, updateUser )
                 // })
-                ...state.users.map((user) => {
+                ...state, 
+                users: [...state.users.filter((user) => {
                     if(user._id !== updateUser.savedID){
                         return user
                     }
-
-                    return {
-                        ...user,
-                        selectedUser: updateUser
-                    }       
-                })
+                }), updateUser],
+                selectedUser: updateUser
             }
         default:
             return state;

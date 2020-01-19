@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { updateUser } from '../actions';
 
 const mapStateToProps = (state) => {
-    //console.log(state);
+    console.log(state)
     return{
         selectedUser: state.selectedUser
     }
@@ -51,7 +51,6 @@ class Profile extends React.Component{
 
     submitChanges = (e) => {
         e.preventDefault();
-        //console.log(this.state);
         this.props.updateUser(this.state);
     }
 
@@ -81,19 +80,19 @@ class Profile extends React.Component{
     renderDefaultView = () => {
         const { alias, firstName, lastName, email, location, mainRole, featYoutube, youtube, bandcamp, spotify, mainWeb} = this.state;
 
-        console.log(this.state);
+        //console.log(this.state);
         return (
         <div>      
             <p>Alias: </p>
             <p>First Name: {firstName}</p>
-            <p>Last Name: </p>
+            <p>Last Name: {lastName}</p>
             <p>Email: {email} </p>
-            <p>Location: </p>
-            <p>Main Role: </p>
+            <p>Location: {location}</p>
+            <p>Main Role: {mainRole}</p>
             <p>Other Roles: </p>
             <p>Instruments: </p>
-            <p>Featured Youtube Link: </p>
-            <p>Youtube Channel: </p>
+            <p>Featured Youtube Link: {featYoutube} </p>
+            <p>Youtube Channel: {youtube} </p>
             <p>Bandcamp Link: </p>
             <p>Spotify Link: </p>
             <p>Main Website: </p>
@@ -102,14 +101,20 @@ class Profile extends React.Component{
     }
 
     componentDidUpdate(prevProps, prevState) {
-
+        //console.log('PrevProps')
+        //console.log(prevProps === this.props.selectedUser)
         if(prevProps.selectedUser !== this.props.selectedUser){
             const { user } = this.props.selectedUser
-
+            console.log(user.lastName)
             this.setState({
                 savedID: user._id,
                 firstName: user.firstName,
-                email: user.email
+                lastName: user.lastName,
+                email: user.email,
+                location: user.location,
+                mainRole: user.mainRole,
+                featYoutube: user.featYoutube,
+                youtube: user.youtube
             })
         }   
     }
