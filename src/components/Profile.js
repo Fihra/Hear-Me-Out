@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { updateUser } from '../actions';
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return{
         selectedUser: state.selectedUser
     }
@@ -35,6 +34,21 @@ class Profile extends React.Component{
             spotify: "",
             mainWeb: ""
         }
+    }
+
+    setDetails = () => {
+        const { user } = this.props.selectedUser
+        this.setState({
+            savedID: user._id,
+            alias: user.alias,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            location: user.location,
+            mainRole: user.mainRole,
+            featYoutube: user.featYoutube,
+            youtube: user.youtube
+        })
     }
 
     changeEditMode = () => {
@@ -80,10 +94,36 @@ class Profile extends React.Component{
     renderDefaultView = () => {
         const { alias, firstName, lastName, email, location, mainRole, featYoutube, youtube, bandcamp, spotify, mainWeb} = this.state;
 
+        // const defaultShow = {
+        //     defaultAlias: alias,
+        //     defaultFirst: firstName,
+        //     defaultLast: lastName,
+        //     defaultEmail: email,
+        //     defaultLocation: location,
+        //     defaultMainRole: mainRole,
+        //     defaultFeatYoutube: featYoutube,
+        //     defaultYoutube: youtube,
+        //     defaultBandcamp: bandcamp,
+        //     defaultSpotify: spotify
+        // }
         //console.log(this.state);
         return (
         <div>      
-            <p>Alias: </p>
+             {/* <p>Alias: {defaultShow.defaultAlias}</p>
+            <p>First Name: {defaultShow.defaultFirst}</p>
+            <p>Last Name: {defaultShow.defaultLast}</p>
+            <p>Email: {defaultShow.defaultEmail} </p>
+            <p>Location: {defaultShow.defaultLocation}</p>
+            <p>Main Role: {defaultShow.defaultMainRole}</p>
+            <p>Other Roles: </p>
+            <p>Instruments: </p>
+            <p>Featured Youtube Link: {defaultShow.defaultFeatYoutube} </p>
+            <p>Youtube Channel: {defaultShow.defaultYoutube} </p>
+            <p>Bandcamp Link: </p>
+            <p>Spotify Link: </p>
+            <p>Main Website: </p> */}
+
+            <p>Alias: {alias}</p>
             <p>First Name: {firstName}</p>
             <p>Last Name: {lastName}</p>
             <p>Email: {email} </p>
@@ -100,22 +140,26 @@ class Profile extends React.Component{
         )    
     }
 
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.selectedUser !== prevState){
+            return { updatedUser: nextProps.selectedUser }
+        }
+        else return null;
+        // console.log('nextProps')
+        // console.log(nextProps)
+        // console.log('prevState')
+        // console.log(prevState)
+    }
+
     componentDidUpdate(prevProps, prevState) {
         //console.log('PrevProps')
-        //console.log(prevProps === this.props.selectedUser)
-        if(prevProps.selectedUser !== this.props.selectedUser){
-            const { user } = this.props.selectedUser
-            console.log(user.lastName)
-            this.setState({
-                savedID: user._id,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
-                location: user.location,
-                mainRole: user.mainRole,
-                featYoutube: user.featYoutube,
-                youtube: user.youtube
-            })
+        console.log(prevProps !== this.props.selectedUser)
+        //console.log(prevProps)
+        //console.log(prevState)
+        //console.log(this.props.selectedUser)
+        console.log('check again after update')
+        if(prevProps.selectedUser !== this.props.selectedUser ){
+            this.setDetails();
         }   
     }
 
@@ -124,8 +168,7 @@ class Profile extends React.Component{
             <div>
             <h1>My Profile <button onClick={this.changeEditMode}>Edit</button></h1>
             {this.state.inEditMode ? this.renderEditView() : this.renderDefaultView()}
-            </div>
-        
+            </div>  
         )
     }
 }

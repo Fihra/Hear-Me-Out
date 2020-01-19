@@ -41,13 +41,12 @@ router.post('/login', async (req, res) => {
     if(user === null){
         return res.status(400).send("Cannot find user");
     }
-    console.log(user)
+
     try{
          if(await bcrypt.compare(req.body.password, user.password)){
              //Create Token using user object, and secret key from .env file
             const accessToken = jwt.sign({user: user}, process.env.ACCESS_TOKEN_SECRET);
             //returns access token json
-            console.log(accessToken)
             res.json({accessToken: accessToken});
          }
          else{
@@ -67,7 +66,6 @@ const authenticateToken = (req, res, next) => {
     if(token === null){
         return res.sendStatus(401);
     }
-    console.log(token)
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
         if(err){
@@ -80,7 +78,6 @@ const authenticateToken = (req, res, next) => {
 
 router.get('/profile', authenticateToken, (req, res) => {
     const user = req.body.user;
-    console.log(user)
     res.json(user)
 })
 
@@ -110,29 +107,19 @@ router.get('/:id', async (req, res) => {
 
 router.patch('/:id', authenticateToken, async (req, res) => {
     console.log("Hit Here Update Backend")
-    console.log(req.body);
-    //console.log("BACKEND PROBLEM")
-    //console.log("Last name was even being written")
     try{
         const updatedUser = await User.updateOne({
             _id: req.body.savedID}, {
                 $set: req.body })
             console.log("2nd time around")
-            console.log(updatedUser)
+
         res.json(updatedUser);
     }catch(err){
         res.json({message: err});
     }
 })
 
-router.put('/:id', authenticateToken, async (req, res) => {
-    console.log("Hit Here Update Backend")
-    console.log(req.body);
-    //const feedback = JSON.stringify(req.body)
-    //console.log(feedback)
-    //console.log("BACKEND PROBLEM")
-    //console.log("Last name was even being written")
-    
+router.put('/:id', authenticateToken, async (req, res) => { 
     try{
         const updatedUser = await User.updateOne({
             _id: req.body.savedID}, {
@@ -152,8 +139,8 @@ router.put('/:id', authenticateToken, async (req, res) => {
                     spotifyLink: req.body.spotifyLink,
                     mainWebsite: req.body.mainWeb
                 }})
-            console.log("2nd time around")
-            console.log(updatedUser)
+            // console.log("2nd time around")
+            // console.log(updatedUser)
         res.json(updatedUser);
     }catch(err){
         res.json({message: err});

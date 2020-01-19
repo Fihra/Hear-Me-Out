@@ -1,4 +1,5 @@
 const initialState = {
+    authType: null,
     users: [],
     selectedUser: {}
 }
@@ -22,7 +23,7 @@ const mainReducer = (state = initialState, action) => {
             }
         case "UPDATE_USER":
             const updateUser = action.updatedUser;
-            console.log(updateUser)
+            //console.log(updateUser)
             return{ 
                 // ...state.filter((user) => {
                 //     return user._id !== action.updateUser.savedID,
