@@ -3,7 +3,7 @@ export const auth = {
     authenticate(){
         this.isAuthenticated = true
     },
-    signout(){
+    logout(){
         this.isAuthenticated = false
     }
 }

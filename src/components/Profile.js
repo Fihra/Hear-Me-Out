@@ -181,9 +181,9 @@ class Profile extends React.Component{
     componentDidUpdate(prevProps, prevState) {
         //console.log(prevProps !== this.props.selectedUser)
         console.log(prevProps)
-        //console.log(prevState)
-        //console.log(this.props.selectedUser)
-        console.log('check again after update')
+        console.log(prevState)
+        console.log(this.props.selectedUser)
+        //console.log('check again after update')
         if(prevProps.selectedUser !== this.props.selectedUser ){
             console.log(prevState)
             console.log("update")

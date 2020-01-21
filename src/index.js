@@ -14,6 +14,7 @@ import storage from 'redux-persist/lib/storage';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import setAuthToken from './utils/setAuthToken';
+import { auth } from './components/auth';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -35,7 +36,8 @@ store.dispatch(loadUsers());
 
 if(localStorage.jwtToken){
     setAuthToken(localStorage.jwtToken);
-}
+    auth.authenticate();
+} 
 
 ReactDOM.render(
     <Provider store={store}>

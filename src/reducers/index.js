@@ -22,6 +22,11 @@ const mainReducer = (state = initialState, action) => {
                 ...state,
                 selectedUser: action.selectedUser
             }
+        case "LOGOUT":
+            return{
+                ...state,
+                selectedUser: {}
+            }
         case "UPDATE_USER":
             console.log(action)
             const updateUser = action.selectedUser;
@@ -47,7 +52,9 @@ const mainReducer = (state = initialState, action) => {
                 //     }
                 // })],
                 // users: updatedArray,
-                selectedUser: updateUser
+                selectedUser: {
+                    user: updateUser
+                }
             }
         default:
             return state;

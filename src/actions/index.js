@@ -69,6 +69,13 @@ export function loggingUser(user){
     }
 }
 
+export function logoutUser(){
+    localStorage.removeItem('jwtToken');
+    return {
+        type: 'LOGOUT_USER'
+    }
+}
+
 export function updateUser(user){
     return((dispatch) => {
         axios.patch(`${API}/${user.savedID}`, user)

@@ -2,6 +2,7 @@ import React, {Fragment, Component} from 'react';
 import Navbar from './components/Navbar';
 import Signup from './forms/Signup';
 import Login from './forms/Login';
+import Logout from './forms/Logout';
 import './App.css';
 
 import About from './components/About';
@@ -52,7 +53,7 @@ class App extends Component{
             <Login {...routerProps} musicians={this.props.users} loginUser={this.props.loginUser}/>
             <Signup {...routerProps} newUser={this.props.newUser}/>
           </Fragment>}/>
-          
+          <Route exact path='/logout' render={(routerProps) => <Logout {...routerProps}/>}/>
         </Router>
       </div>
     );
