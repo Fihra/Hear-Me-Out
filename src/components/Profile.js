@@ -179,6 +179,10 @@ class Profile extends React.Component{
     // }
 
     componentDidUpdate(prevProps, prevState) {
+        //TODO: UPDATE USER because selectedUser creates another property when JWT is made
+        //adding another level to access props as 'user'
+        //but it cannot re render props after update since user won't exist when editing
+
         //console.log(prevProps !== this.props.selectedUser)
         console.log(prevProps)
         console.log(prevState)
