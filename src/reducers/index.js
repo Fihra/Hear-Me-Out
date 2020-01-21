@@ -1,7 +1,8 @@
 const initialState = {
     authType: null,
     users: [],
-    selectedUser: {}
+    selectedUser: {},
+    isLoggedIn: false
 }
 
 const mainReducer = (state = initialState, action) => {
@@ -20,11 +21,13 @@ const mainReducer = (state = initialState, action) => {
         case "LOGIN":
             return{
                 ...state,
+                isLoggedIn: true,
                 selectedUser: action.selectedUser
             }
         case "LOGOUT":
             return{
                 ...state,
+                isLoggedIn: false,
                 selectedUser: {}
             }
         case "UPDATE_USER":

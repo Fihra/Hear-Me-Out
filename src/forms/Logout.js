@@ -14,6 +14,7 @@ class Logout extends React.Component{
     componentDidMount(){
         auth.logout();
         localStorage.removeItem('jwtToken');
+        this.props.logoutUser();
     }
 
     render(){
@@ -23,4 +24,4 @@ class Logout extends React.Component{
     }
 }
 
-export default connect(mapDispatchToProps)(Logout);
+export default connect(null, mapDispatchToProps)(Logout);

@@ -72,7 +72,7 @@ export function loggingUser(user){
 export function logoutUser(){
     localStorage.removeItem('jwtToken');
     return {
-        type: 'LOGOUT_USER'
+        type: 'LOGOUT'
     }
 }
 

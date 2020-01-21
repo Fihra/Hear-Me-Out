@@ -1,12 +1,21 @@
 import React from 'react';
 import { Link} from 'react-router-dom';
 import { Tabs, Tab } from '@material-ui/core';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) =>{
+    return {
+        isLoggedIn: state.isLoggedIn
+    }
+}
 
 class Navbar extends React.Component{
+    
     logInOut = () => {
-        if(localStorage.jwtToken){
+        console.log(this.props.isLoggedIn)
+        if(this.props.isLoggedIn){
             return <Tab label="Logout" component={Link} to='/logout'/>
-        } else{
+        } else {
             return <Tab label="Login/Signup" component={Link} to='/login'/>
         }
     }
@@ -33,4 +42,4 @@ class Navbar extends React.Component{
     }
 }
 
-export default Navbar;
+export default connect(mapStateToProps)(Navbar);
