@@ -5,6 +5,7 @@ const initialState = {
 }
 
 const mainReducer = (state = initialState, action) => {
+    console.log(action)
     switch(action.type){
         case "FETCH_USERS":
             return{
@@ -19,22 +20,33 @@ const mainReducer = (state = initialState, action) => {
         case "LOGIN":
             return{
                 ...state,
-                selectedUser: action.user
+                selectedUser: action.selectedUser
             }
         case "UPDATE_USER":
-            const updateUser = action.updatedUser;
-            //console.log(updateUser)
+            console.log(action)
+            const updateUser = action.selectedUser;
+
+            // const updatedArray = [...state.users.filter((user) => {
+            //     if(user._id !== updateUser.savedID){
+            //         return user
+            //     } 
+            // }, updatedUser)]
+            //console.log(updatedArray)
             return{ 
-                // ...state.filter((user) => {
-                //     return user._id !== action.updateUser.savedID,
-                //     Object.assign({}, updateUser )
-                // })
                 ...state, 
                 users: [...state.users.filter((user) => {
                     if(user._id !== updateUser.savedID){
                         return user
                     }
                 }), updateUser],
+                // users: [...state.users.map((user) => {
+                //     if(user._id !== updateUser.savedID){
+                //         return user
+                //     } else{
+                //         return updateUser
+                //     }
+                // })],
+                // users: updatedArray,
                 selectedUser: updateUser
             }
         default:

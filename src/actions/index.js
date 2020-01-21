@@ -65,7 +65,7 @@ export function loginUser(user){
 export function loggingUser(user){
     return {
         type: "LOGIN",
-        user: user
+        selectedUser: user
     }
 }
 
@@ -83,6 +83,6 @@ export function updateUser(user){
 export function updateUserInfo(user){
     return{
         type: "UPDATE_USER",
-        updatedUser: user
+        selectedUser: user
     }
 }

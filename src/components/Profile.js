@@ -37,18 +37,42 @@ class Profile extends React.Component{
     }
 
     setDetails = () => {
-        const { user } = this.props.selectedUser
-        this.setState({
-            savedID: user._id,
-            alias: user.alias,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            location: user.location,
-            mainRole: user.mainRole,
-            featYoutube: user.featYoutube,
-            youtube: user.youtube
-        })
+        // const { _id, alias, firstName, lastName, email, location, mainRole, featYoutube, youtube } = this.props.selectedUser
+
+        if(!this.props.selectedUser.hasOwnProperty('user')){
+            this.updateDetails();
+        } else {
+            const { user } = this.props.selectedUser
+            console.log(user)
+            this.setState({
+                savedID: user._id,
+                alias: user.alias,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                location: user.location,
+                mainRole: user.mainRole,
+                featYoutube: user.featYoutube,
+                youtube: user.youtube
+            })
+        }
+
+    }
+
+    updateDetails = () => {
+            console.log("Hit Here")
+             const { _id, alias, firstName, lastName, email, location, mainRole, featYoutube, youtube } = this.props.selectedUser
+             this.setState({
+                savedID: _id,
+                alias: alias,
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                location: location,
+                mainRole: mainRole,
+                featYoutube: featYoutube,
+                youtube: youtube
+            })
     }
 
     changeEditMode = () => {
@@ -140,27 +164,31 @@ class Profile extends React.Component{
         )    
     }
 
-    static getDerivedStateFromProps(nextProps, prevState){
-        if(nextProps.selectedUser !== prevState){
-            return { updatedUser: nextProps.selectedUser }
-        }
-        else return null;
-        // console.log('nextProps')
-        // console.log(nextProps)
-        // console.log('prevState')
-        // console.log(prevState)
-    }
+    // componentDidMount(){
+    //     this.setDetails()
+    // }
+
+    // static getDerivedStateFromProps(nextProps, prevState){
+    //     console.log("State has changed")
+    //     console.log(nextProps)
+    //     if(nextProps.selectedUser !== prevState){
+    //         return { selectedUser: nextProps.selectedUser }
+    //     }
+    //     else return null;
+
+    // }
 
     componentDidUpdate(prevProps, prevState) {
-        //console.log('PrevProps')
-        console.log(prevProps !== this.props.selectedUser)
-        //console.log(prevProps)
+        //console.log(prevProps !== this.props.selectedUser)
+        console.log(prevProps)
         //console.log(prevState)
         //console.log(this.props.selectedUser)
         console.log('check again after update')
         if(prevProps.selectedUser !== this.props.selectedUser ){
+            console.log(prevState)
+            console.log("update")
             this.setDetails();
-        }   
+        } 
     }
 
     render(){

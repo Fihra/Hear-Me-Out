@@ -45,7 +45,7 @@ router.post('/login', async (req, res) => {
     try{
          if(await bcrypt.compare(req.body.password, user.password)){
              //Create Token using user object, and secret key from .env file
-            const accessToken = jwt.sign({user: user}, process.env.ACCESS_TOKEN_SECRET);
+            const accessToken = jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET);
             //returns access token json
             res.json({accessToken: accessToken});
          }
@@ -71,20 +71,22 @@ const authenticateToken = (req, res, next) => {
         if(err){
             return res.sendStatus(403);
         }
-        req.user = user
+        console.log(user)
+        req.selectedUser = user
         next();
     })
 }
 
-router.get('/profile', authenticateToken, (req, res) => {
-    const user = req.body.user;
-    res.json(user)
-})
+// router.get('/profile', authenticateToken, (req, res) => {
+//     console.log(req.body)
+//     const selectedUser = req.body.user;
+//     res.json(selectedUser)
+// })
 
 router.get('/:id', async (req, res) => {
     try{
-        const user = await User.findById(req.params.id);
-        res.json(user);
+        const selectedUser = await User.findById(req.params.id);
+        res.json(selectedUser);
     }catch(err){
         res.json({message: err});
     }
@@ -107,6 +109,7 @@ router.get('/:id', async (req, res) => {
 
 router.patch('/:id', authenticateToken, async (req, res) => {
     console.log("Hit Here Update Backend")
+    console.log(req.body)
     try{
         const updatedUser = await User.updateOne({
             _id: req.body.savedID}, {

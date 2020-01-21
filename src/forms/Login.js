@@ -33,9 +33,6 @@ class Login extends React.Component{
     }
 
     validateUser = () => {
-        //const {musicians} =this.props;
-        //const { email, password } = this.state;
-        //TODO: LOGIN AUTHENTICATE TO BACKEND
         this.loggingIn();
         this.props.loginUser(this.state);
  
